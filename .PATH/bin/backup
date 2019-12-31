@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+const b = require('../lib/backup.js');
+
+(async() => {
+  await b.backup();
+})();

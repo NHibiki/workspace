@@ -1,0 +1,22 @@
+  
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Env
+      run: docker build . --file .dockerfile --tag nhibiki/dev:env
+    - name: Build Gitpod Env
+      run: docker build . --file .gitpod.dockerfile --tag nhibiki/dev:gitpod-env
+    - name: Login Docker Registry
+      run: docker login --username ${{ secrets.DUSER }} --password ${{ secrets.DPASS }}
+    - name: Push Container
+      run: docker push nhibiki/dev:env
+    - name: Push Gitpod Container
+      run: docker push nhibiki/dev:gitpod-env
+    - name: Clean Up
+      run: docker logout

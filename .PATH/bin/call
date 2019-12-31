@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+const b = require('../lib/backup.js');
+
+(async() => {
+  const args = [...process.argv];
+  args.shift(); args.shift();
+  process.stdout.write((await b.call(...args)).toString());
+})();

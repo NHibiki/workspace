@@ -1,0 +1,11 @@
+https://{$HOST}
+{
+    # tls cert key
+    # tls self_signed
+    # jwt "/.auth/" "https://{$HOST}/.auth/" "i@yuuno.cc"
+    proxy / 127.0.0.1:18080 {
+        transparent
+        websocket
+        insecure_skip_verify
+    }
+}

@@ -1,0 +1,18 @@
+# Workspace
+
+.DS_Store
+._.DS_Store
+.stfolder
+
+node_modules
+.data
+.cache
+.next
+.build
+.checkpoint.json
+
+Sync
+!Sync/.stignore
+
+Temp
+!Temp/.gitkeep

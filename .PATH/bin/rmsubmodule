@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const join = require('path').join;
+const fs = require('fs');
+const { cli, pwd } = require('../lib/backup.js');
+
+(async () => {
+    const argv = process.argv;
+    if (argv[2]) {
+        let rawPath = argv[2];
+        if (!rawPath.startsWith('/')) {
+            rawPath = join(pwd, rawPath);
+        }
+        if (!fs.existsSync(rawPath)) {
+            console.error(`Folder '${rawPath}' cannot be found.`);
+        } else {
+            await cli(pwd, `git submodule deinit ${rawPath}`);
+            await cli(pwd, `rm -rf ${rawPath}`);
+            await cli(pwd, `git rm ${rawPath} -r`);
+            await cli(pwd, `git rm --cached ${rawPath} -r`);
+        }
+    } else {
+        console.error("Please pass the path in.");
+    }
+})();

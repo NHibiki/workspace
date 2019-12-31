@@ -1,0 +1,12 @@
+image: nhibiki/dev:gitpod-env
+
+ports:
+  - port: 3000
+  - port: 3001
+  - port: 3002
+
+vscode:
+  extensions:
+    - dracula-theme.theme-dracula@2.19.0:hshm5Rl1Hf698GWH+tNfKQ==
+    - eamodio.gitlens@10.2.0:L4GfuK5a2eOIpfcKVVvjEw==
+    - octref.vetur@0.22.6:7frR53XJ71Pa6fZpNmC2pA==

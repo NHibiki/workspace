@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const join = require('path').join;
+const basename = require('path').basename;
+const fs = require('fs');
+const { cli, pwd } = require('../lib/backup.js');
+
+(async () => {
+    const argv = process.argv;
+    if (argv[2]) {
+        const url = argv[2];
+        let name = basename(url);
+        if (name.endsWith('.git')) {
+            name = name.substr(0, name.length-4);
+        }
+        const rawPath = join(pwd, name);
+        if (fs.existsSync(rawPath)) {
+            console.error(`Folder '${rawPath}' already exists.`);
+        } else {
+            await cli(pwd, `git submodule add ${url} ${rawPath}`);
+        }
+    } else {
+        console.error("Please pass the url in.");
+    }
+})();

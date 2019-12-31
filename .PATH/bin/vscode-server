@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const b = require('../lib/backup.js');
+
+const host = process.env.HOST;
+if (!host) {
+    console.error("Please set your hostname first (export HOST='example.com')");
+    process.exit(1);
+}
+
+const passwd = process.env.PASSWORD;
+if (!passwd) {
+    console.error("Please set your password first (export HOSTPASS='admin')");
+    process.exit(1);
+}
+const bearHost = host.split(':')[0];
+
+const code = "code --host 127.0.0.1 --port 18080"; // + "--auth none";
+const caddy = `caddyy -agree -email ide@${bearHost} -conf ${b.join(b.rootDir, '.PATH/lib/vscode.caddyfile')}`;
+
+b.callAsync(...caddy.split(' '));
+b.callAsync(...code.split(' '));

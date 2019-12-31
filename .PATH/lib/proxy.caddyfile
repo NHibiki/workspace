@@ -1,0 +1,8 @@
+0.0.0.0:9000
+{
+    proxy /waf http://{$VHOST} {
+        transparent
+        websocket
+        header_upstream Host {$VHOST}
+    }
+}
